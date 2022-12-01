@@ -1,0 +1,164 @@
+{
+    "Signature plain croissant": {
+        "price": 80,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Almond croissant": {
+        "price": 120,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Almond chocolate croissant": {
+        "price": 125,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Linen maple syrup croissant": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Matcha red bean croissant": {
+        "price": 105,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Tea croissant": {
+        "price": 95,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Pain au chocolate": {
+        "price": 90,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Kouign amann": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Chocolate kouign amann ": {
+        "price": 110,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Hot dog danish": {
+        "price": 105,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Mushroom truffle cream danish": {
+        "price": 105,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Kurobuta bbq danish": {
+        "price": 110,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Ham and cheese croissant": {
+        "price": 160,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Chicken spinach cheese croissant": {
+        "price": 140,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Raisin danish": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Chocolate eclair": {
+        "price": 125,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Espresso eclair": {
+        "price": 125,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Vanilla eclair": {
+        "price": 125,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Double chocolate cake": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Matcha cranberry cake": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Lemon poppy seed cake": {
+        "price": 100,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Apple turnover": {
+        "price": 120,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Fresh lime cheesecake": {
+        "price": 145,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    },
+    "Blueberry yogurt cheesecake": {
+        "price": 145,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Chocolate magnum mousse": {
+        "price": 160,
+        "quantity": 30,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Brownie": {
+        "price": 95,
+        "quantity": 29,
+        "recommend": "yes",
+        "status": "available"
+    },
+    "Cinnamon raisin swirl": {
+        "price": 105,
+        "quantity": 30,
+        "recommend": "no",
+        "status": "available"
+    }
+}
