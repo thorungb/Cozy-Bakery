@@ -69,7 +69,7 @@ class Admin:
         print("-------------------------------------------------------------------------------------------------------")
         self.all_menu.sort(key=lambda x: x.name)  # sort the menu by name
         for i in self.all_menu:
-            print(f" {i.name:^33} {i.quantity:^14} {i.price:^16} {i.recommend:^16} {i.status:^20}")
+            print(f" {i.name:^33} {i.quantity:^14} {i.price:^16.2f} {i.recommend:^16} {i.status:^20}")
         print("-------------------------------------------------------------------------------------------------------")
         print("-------------------------------------------------------------------------------------------------------")
 
@@ -99,7 +99,7 @@ class Admin:
                 "             MENU NAME                QUANTITY      PRICE (Baht)      RECOMMEND           STATUS       ")
             print(
                 "-------------------------------------------------------------------------------------------------------")
-            print(f" {i:^33} {self.data_menu[i]['quantity']:^14} {self.data_menu[i]['price']:^16}  "
+            print(f" {i:^33} {self.data_menu[i]['quantity']:^14} {self.data_menu[i]['price']:^16.2f}  "
                   f"{self.data_menu[i]['recommend']:^14} {self.data_menu[i]['status']:^22} ")
             print(
                 "-------------------------------------------------------------------------------------------------------")
@@ -120,7 +120,7 @@ class Admin:
                             while not new_price.isdigit():
                                 print("< Invalid input. Menu price must be a NUMBER. >")
                                 new_price = input("Enter new price: ")
-                            self.data_menu[i]['price'] = int(new_price)
+                            self.data_menu[i]['price'] = float(new_price)
                             print("Price has been changed successfully!")
                             update_information()
                             print_current()

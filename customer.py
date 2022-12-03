@@ -33,7 +33,7 @@ class Customer:
             print("---------------------------------------------------------------------------------------")
             for menu in self.data_menu:  # Search for the menu name
                 if menu_name.lower() in menu.lower():
-                    print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28} ")
+                    print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28.2f} ")
             print("---------------------------------------------------------------------------------------")
             print("---------------------------------------------------------------------------------------")
 
@@ -44,7 +44,7 @@ class Customer:
         print("---------------------------------------------------------------------------------------")
         self.all_menu.sort(key=lambda x: x.name)  # sort the menu by name
         for i in self.all_menu:
-            print(f" {i.name:^33} {i.quantity:^22} {i.price:^28} ")
+            print(f" {i.name:^33} {i.quantity:^22} {i.price:^28.2f} ")
         print("---------------------------------------------------------------------------------------")
         print("---------------------------------------------------------------------------------------")
 
@@ -56,7 +56,7 @@ class Customer:
         self.data_menu = dict(sorted(self.data_menu.items()))  # Sort the dictionary by key
         for menu in self.data_menu:
             if self.data_menu[menu]['recommend'] in ["Yes", "yes", "y", "Y"]:
-                print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28} ")
+                print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28.2f} ")
         print("---------------------------------------------------------------------------------------")
         print("---------------------------------------------------------------------------------------")
 
@@ -70,7 +70,7 @@ class Customer:
             print("-------------------------------------------------------------------------------")
             for menu in sorted(self.__cart):
                 print(f" {str(menu[0][0]).upper() + str(menu[0][1:len(menu[0]) + 1]).lower():^33} "
-                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24} ")
+                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24.2f} ")
             print("-------------------------------------------------------------------------------")
             print("-------------------------------------------------------------------------------")
 
@@ -146,7 +146,7 @@ class Customer:
             print("-------------------------------------------------------------------------------")
             for menu in sorted(self.__cart):
                 print(f" {str(menu[0][0]).upper() + str(menu[0][1:len(menu[0]) + 1]).lower():^33} "
-                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24} ")
+                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24.2f} ")
             print("-------------------------------------------------------------------------------")
             print(
                 f"Total price:    {sum([int(self.data_menu[menu[0]]['price']) * menu[1] for menu in self.__cart]):.2f} Baht")
