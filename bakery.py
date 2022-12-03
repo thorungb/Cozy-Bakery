@@ -7,7 +7,7 @@ from menuDB import MenuDB
 all_menu = []
 menu = MenuDB("")
 for i in menu.read_menu():
-    product = MenuDB(i)
+    product = MenuDB(i)   # create an object of class MenuDB
     product.read_menu()
     product.detail_menu()
     all_menu.append(product)
@@ -100,7 +100,7 @@ class Bakery:
             print("\n------------------------ Welcome to Cozy Bakery! °˖✧◝(⁰▿⁰)◜✧˖° -----------------------")
             role = input("Please select your role? (C)ustomer or (A)dmin: ").upper()
             if role in ["A", "ADMIN"]:
-                for i in range(3):
+                for times in range(3):
                     username = input("Enter your username: ")
                     password = input("Enter your password: ")
                     admin = Admin(username, password, all_menu)

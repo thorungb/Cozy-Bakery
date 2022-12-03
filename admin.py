@@ -6,7 +6,7 @@ from menuDB import MenuDB
 all_menu = []
 menu = MenuDB("")
 for i in menu.read_menu():
-    product = MenuDB(i)
+    product = MenuDB(i)  # create an object of class MenuDB
     product.read_menu()
     product.detail_menu()
     all_menu.append(product)
@@ -51,15 +51,15 @@ class Admin:
     def read_data_admin(self):
         with open('data_admin.csv', 'r') as admin_file:
             rows = csv.DictReader(admin_file)
-            for i in rows:
-                self.__data_admin.append(i)
+            for items in rows:
+                self.__data_admin.append(items)
         return self.__data_admin
 
     def is_admin(self):
         # check if username and password are correct with the data in data_admin.csv
         self.read_data_admin()
-        for i in self.__data_admin:
-            if self.username == i['username'] and self.password == i['password']:
+        for items in self.__data_admin:
+            if self.username == items['username'] and self.password == items['password']:
                 return True
 
     def check_stock(self):
@@ -68,8 +68,8 @@ class Admin:
         print("             MENU NAME                QUANTITY      PRICE (Baht)      RECOMMEND           STATUS       ")
         print("-------------------------------------------------------------------------------------------------------")
         self.all_menu.sort(key=lambda x: x.name)  # sort the menu by name
-        for i in self.all_menu:
-            print(f" {i.name:^33} {i.quantity:^14} {i.price:^16.2f} {i.recommend:^16} {i.status:^20}")
+        for items in self.all_menu:
+            print(f" {items.name:^33} {items.quantity:^14} {items.price:^16.2f} {items.recommend:^16} {items.status:^20}")
         print("-------------------------------------------------------------------------------------------------------")
         print("-------------------------------------------------------------------------------------------------------")
 
@@ -99,8 +99,8 @@ class Admin:
                 "             MENU NAME                QUANTITY      PRICE (Baht)      RECOMMEND           STATUS       ")
             print(
                 "-------------------------------------------------------------------------------------------------------")
-            print(f" {i:^33} {self.data_menu[i]['quantity']:^14} {self.data_menu[i]['price']:^16.2f}  "
-                  f"{self.data_menu[i]['recommend']:^14} {self.data_menu[i]['status']:^22} ")
+            print(f" {items:^33} {self.data_menu[items]['quantity']:^14} {self.data_menu[items]['price']:^16.2f}  "
+                  f"{self.data_menu[items]['recommend']:^14} {self.data_menu[items]['status']:^22} ")
             print(
                 "-------------------------------------------------------------------------------------------------------")
             print(
@@ -109,18 +109,17 @@ class Admin:
         if str(menu_name).lower() not in str(self.data_menu).lower():  # Check if the menu name is in the menu list
             print(f"< Sorry, '{menu_name}' doesn't exist in the menu. >")
         else:
-            for i in self.data_menu:
-                if menu_name.lower() == i.lower():  # if menu name exists, show only the menu that the admin wants to change
+            for items in self.data_menu:
+                if menu_name.lower() == items.lower():  # if menu name exists, show only the menu that the admin wants to change
                     print_current()
                     choice = input_choice()
-                    # if the quantity = 0, the status will be changed to "out of stock"
                     while True:
                         if choice == "1":
                             new_price = input("Enter new price: ")
                             while not new_price.isdigit():
                                 print("< Invalid input. Menu price must be a NUMBER. >")
                                 new_price = input("Enter new price: ")
-                            self.data_menu[i]['price'] = float(new_price)
+                            self.data_menu[items]['price'] = float(new_price)
                             print("Price has been changed successfully!")
                             update_information()
                             print_current()
@@ -129,7 +128,7 @@ class Admin:
                             while not isinstance(new_quantity, int):
                                 print("< Invalid input. Menu quantity must be a INTEGER. >")
                                 new_quantity = input("Enter new quantity: ")
-                            self.data_menu[i]['quantity'] = int(new_quantity)
+                            self.data_menu[items]['quantity'] = int(new_quantity)
                             print("Quantity has been changed successfully!")
                             auto_update_status()
                             update_information()
@@ -140,9 +139,9 @@ class Admin:
                                 print("< Invalid input. Please choose only 'YES' or 'NO'. >")
                                 new_recommend = input("Enter new recommend (y/n): ").lower()
                             if new_recommend in ["y", "Y", "yes", "Yes", "YES"]:
-                                self.data_menu[i]['recommend'] = "yes"
+                                self.data_menu[items]['recommend'] = "yes"
                             elif new_recommend in ["n", "N", "no", "No", "NO"]:
-                                self.data_menu[i]['recommend'] = "no"
+                                self.data_menu[items]['recommend'] = "no"
                             update_information()
                             print("Recommend has been changed successfully!")
                             print_current()
@@ -155,15 +154,15 @@ class Admin:
                                 print("< Invalid input. Please choose only 'AVAILABLE' or 'OUT OF STOCK'. >")
                                 new_status = input("Enter new status (A)vailable/(O)ut of stock: ").lower()
                             if new_status in ["a", "A", "available", "Available", "AVAILABLE"]:
-                                if int(self.data_menu[i]['quantity']) == 0:
+                                if int(self.data_menu[items]['quantity']) == 0:
                                     print("< Sorry, the quantity is 0. Please change the quantity first. >")
                                     # out the if statement and go back to the while loop
                                     choice = input_choice()
                                     continue
                                 else:
-                                    self.data_menu[i]['status'] = "available"
+                                    self.data_menu[items]['status'] = "available"
                             elif new_status in ["o", "O", "out of stock", "Out of stock", "OUT OF STOCK"]:
-                                self.data_menu[i]['status'] = "out of stock"
+                                self.data_menu[items]['status'] = "out of stock"
                             print("Status has been changed successfully!")
                             update_information()
                             print_current()

@@ -11,7 +11,7 @@ class Menu:
         if not isinstance(new_name, str):
             print("< Invalid input. Menu name must be a STRING. >")
 
-        new_price = int(input("Please enter new menu price: "))
+        new_price = float(input("Please enter new menu price: "))
         if not isinstance(new_price, (int, float)):
             print("< Invalid input. Menu price must be a NUMBER. >")
 

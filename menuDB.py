@@ -3,12 +3,15 @@ import json
 
 class MenuDB:
     def __init__(self, name):
-        self.data_menu = None
         self.__name = name
         self.__price = None
         self.__quantity = None
         self.__recommend = None
         self.__status = None
+        # Available: today's menu
+        # Out of stock: menu that is not available today or the quantity is 0
+        # if the quantity = 0, the status will be changed to "out of stock"
+        self.data_menu = None
 
     @property
     def name(self):
@@ -55,7 +58,7 @@ class MenuDB:
             self.data_menu = json.load(menu_file)
         return self.data_menu
 
-    def detail_menu(self):  # show detail of menu
+    def detail_menu(self):  # get the detail of the menu
         for i in sorted(self.data_menu):
             if self.name == i:
                 self.price = self.data_menu[i]["price"]

@@ -5,7 +5,7 @@ from menuDB import MenuDB
 all_menu = []
 menu = MenuDB("")
 for i in menu.read_menu():
-    product = MenuDB(i)
+    product = MenuDB(i)  # create an object of class MenuDB
     product.read_menu()
     product.detail_menu()
     all_menu.append(product)
@@ -13,8 +13,8 @@ for i in menu.read_menu():
 
 class Customer:
     def __init__(self, all_menu):
-        self.all_menu = all_menu
         self.__cart = []
+        self.all_menu = all_menu
         self.data_menu = MenuDB.read_menu(self)
 
     @property
@@ -31,9 +31,9 @@ class Customer:
             print("---------------------------------------------------------------------------------------")
             print("             MENU NAME               REMAINING QUANTITY      PRICE (Baht per piece)    ")
             print("---------------------------------------------------------------------------------------")
-            for menu in self.data_menu:  # Search for the menu name
-                if menu_name.lower() in menu.lower():
-                    print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28.2f} ")
+            for items in self.data_menu:  # Search for the menu name
+                if menu_name.lower() in items.lower():
+                    print(f" {items:^33} {self.data_menu[items]['quantity']:^22} {self.data_menu[items]['price']:^28.2f} ")
             print("---------------------------------------------------------------------------------------")
             print("---------------------------------------------------------------------------------------")
 
@@ -43,8 +43,8 @@ class Customer:
         print("             MENU NAME               REMAINING QUANTITY      PRICE (Baht per piece)    ")
         print("---------------------------------------------------------------------------------------")
         self.all_menu.sort(key=lambda x: x.name)  # sort the menu by name
-        for i in self.all_menu:
-            print(f" {i.name:^33} {i.quantity:^22} {i.price:^28.2f} ")
+        for items in self.all_menu:
+            print(f" {items.name:^33} {items.quantity:^22} {items.price:^28.2f} ")
         print("---------------------------------------------------------------------------------------")
         print("---------------------------------------------------------------------------------------")
 
@@ -54,9 +54,9 @@ class Customer:
         print("             MENU NAME               REMAINING QUANTITY      PRICE (Baht per piece)    ")
         print("---------------------------------------------------------------------------------------")
         self.data_menu = dict(sorted(self.data_menu.items()))  # Sort the dictionary by key
-        for menu in self.data_menu:
-            if self.data_menu[menu]['recommend'] in ["Yes", "yes", "y", "Y"]:
-                print(f" {menu:^33} {self.data_menu[menu]['quantity']:^22} {self.data_menu[menu]['price']:^28.2f} ")
+        for items in self.data_menu:
+            if self.data_menu[items]['recommend'] in ["Yes", "yes", "y", "Y"]:
+                print(f" {items:^33} {self.data_menu[items]['quantity']:^22} {self.data_menu[items]['price']:^28.2f} ")
         print("---------------------------------------------------------------------------------------")
         print("---------------------------------------------------------------------------------------")
 
@@ -68,9 +68,9 @@ class Customer:
             print("-------------------------------------------------------------------------------")
             print("             MENU NAME                  QUANTITY         TOTAL PRICE (Baht)    ")
             print("-------------------------------------------------------------------------------")
-            for menu in sorted(self.__cart):
-                print(f" {str(menu[0][0]).upper() + str(menu[0][1:len(menu[0]) + 1]).lower():^33} "
-                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24.2f} ")
+            for items in sorted(self.__cart):
+                print(f" {str(items[0][0]).upper() + str(items[0][1:len(items[0]) + 1]).lower():^33} "
+                      f"{items[1]:^18} {self.data_menu[items[0]]['price'] * items[1]:^24.2f} ")
             print("-------------------------------------------------------------------------------")
             print("-------------------------------------------------------------------------------")
 
@@ -88,14 +88,14 @@ class Customer:
                 print("< Sorry, we don't have enough quantity. >")
 
             # Check if the menu is already in your cart
-            elif (menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()) in [i[0] for i in self.__cart]:
+            elif (menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()) in [items[0] for items in self.__cart]:
                 # i[0] is the menu name in the cart
                 print("< You already have this menu in your cart. Please choose another menu or change the quantity. >")
                 choice = input("Do you want to change the quantity? (Y/N): ").upper()
                 if choice == "Y":  # If the user wants to change the quantity
-                    for i in self.__cart:
-                        if menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower() == i[0]:
-                            self.__cart.remove(i)  # Remove the menu from the cart
+                    for items in self.__cart:
+                        if menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower() == items[0]:
+                            self.__cart.remove(items)  # Remove the menu from the cart
                             self.__cart.append((menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower(), amount))
                             print("Changed the quantity successfully!\n")
                 if choice == "N":  # If the user doesn't want to change the quantity
@@ -125,9 +125,9 @@ class Customer:
         if len(self.__cart) == 0:
             print("< Your cart is EMPTY now. Please add some menu to your cart. >")
         elif len(self.__cart) > 0:
-            for i in self.__cart:
-                if (menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()) == i[0]:
-                    self.__cart.remove(i)
+            for items in self.__cart:
+                if (menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()) == items[0]:
+                    self.__cart.remove(items)
                     print(f"Removed '{menu_name}' from cart successfully!")
                     Customer.show_cart(self)
                 else:
@@ -144,22 +144,24 @@ class Customer:
             print("-------------------------------------------------------------------------------")
             print("             MENU NAME                  QUANTITY            PRICE (Baht)       ")
             print("-------------------------------------------------------------------------------")
-            for menu in sorted(self.__cart):
-                print(f" {str(menu[0][0]).upper() + str(menu[0][1:len(menu[0]) + 1]).lower():^33} "
-                      f"{menu[1]:^18} {self.data_menu[menu[0]]['price'] * menu[1]:^24.2f} ")
+            for items in sorted(self.__cart):
+                print(f" {str(items[0][0]).upper() + str(items[0][1:len(items[0]) + 1]).lower():^33} "
+                      f"{items[1]:^18} {self.data_menu[items[0]]['price'] * items[1]:^24} ")
             print("-------------------------------------------------------------------------------")
             print(
-                f"Total price:    {sum([int(self.data_menu[menu[0]]['price']) * menu[1] for menu in self.__cart]):.2f} Baht")
+                f"Total price:    {sum([int(self.data_menu[items[0]]['price']) * items[1] for items in self.__cart]):.2f} Baht")
             pay_method = input("\nPlease choose your payment method (Cash or Credit): ").lower()
-            if pay_method == "cash":
-                cash = int(input("Please enter the amount of cash: "))
-                if cash < sum([int(self.data_menu[menu[0]]['price']) * menu[1] for menu in self.__cart]):
+            while pay_method not in ["cash", "credit"]:  # if the payment method is not cash or credit
+                print("< Invalid input. Please choose 'Cash' or 'Credit'. >")
+                pay_method = input("Please choose your payment method (Cash or Credit): ").lower()
+            if pay_method == "cash":  # If the payment method is cash
+                cash = float(input("Please enter the amount of cash: "))
+                if cash < sum([float(self.data_menu[items[0]]['price']) * items[1] for items in self.__cart]):
                     print("< Sorry, you don't have enough cash. >")
                 else:
-                    print(
-                        f"\nYour change is {cash - sum([int(self.data_menu[menu[0]]['price']) * menu[1] for menu in self.__cart]):.2f} Baht")
+                    print(f"\nYour change is {cash - sum([float(self.data_menu[items[0]]['price']) * items[1] for items in self.__cart]):.2f} Baht")
                     print("************************* Thank you for your payment **************************")
                     self.clear_cart()  # Clear the cart after paying the bill
-            elif pay_method == "credit":
+            elif pay_method == "credit":  # If the payment method is credit
                 print("************************* Thank you for your payment **************************")
                 self.clear_cart()  # Clear the cart after paying the bill
