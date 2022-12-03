@@ -2,7 +2,6 @@ from admin import Admin
 from customer import Customer
 from menu import Menu
 from menuDB import MenuDB
-import json
 
 # object of class MenuDB
 all_menu = []
@@ -18,8 +17,7 @@ class Bakery:
     def __init__(self):
         self.admin_choice = None
         self.customer_choice = None
-        with open("data_menu.json", "r") as menu_file:
-            self.data_menu = json.load(menu_file)
+        self.data_menu = MenuDB.read_menu(self)
 
     def admin_action(self, admin):
         while True:
@@ -34,14 +32,14 @@ class Bakery:
                     print("\nThis is the current stock of all menu: ")
                     admin.check_stock()
                 elif self.admin_choice == 2:  # if the admin choose to update detail
-                    menu_name = input("Enter the menu name: ")
+                    menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
                     admin.update_detail(menu_name)
                 elif self.admin_choice == 3:  # if the admin choose to add new menu
                     print("You are adding a new menu...")
                     Menu.add_new_menu(self)
                 elif self.admin_choice == 4:  # if the admin choose to delete menu
                     print("You are deleting a menu...")
-                    menu_name = input("Enter the menu name: ")
+                    menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
                     Menu.delete_menu(self, menu_name)
                 elif self.admin_choice == 5:  # if the admin choose to exit
                     print("\n> Thank you for using the system, Have a nice day! (◕‿◕✿) <")
@@ -73,16 +71,16 @@ class Bakery:
                         customer.show_menu_recommend()
                     else:
                         print("< Please enter A or R >")
-                elif self.customer_choice == 3:  # if the customer wants to view the shopping cart
+                elif self.customer_choice == 3:  # if the customer wants to do with the shopping cart
                     print(
                         f"\n>> What do you want to do? \n1. Add to cart \n2. Remove from cart \n3. Clear cart \n4. View cart")
                     choice = int(input("Select your choice: "))
                     if choice == 1:  # if the customer wants to add to cart
-                        menu_name = input("Enter the menu name: ")
+                        menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
                         amount = int(input("How much do you want to add?: "))
                         customer.add_to_cart(menu_name, amount)
                     elif choice == 2:  # if the customer wants to remove from cart
-                        menu_name = input("Enter the menu name: ")
+                        menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
                         customer.remove_from_cart(menu_name)
                     elif choice == 3:  # if the customer wants to clear the cart
                         customer.clear_cart()

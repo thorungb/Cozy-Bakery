@@ -16,10 +16,9 @@ class Admin:
     def __init__(self, username, password, all_menu):
         self.__username = username
         self.__password = password
-        self.all_menu = all_menu
         self.__data_admin = []
-        with open("data_menu.json", "r") as menu_file:
-            self.data_menu = json.load(menu_file)
+        self.all_menu = all_menu
+        self.data_menu = MenuDB.read_menu(self)
 
     @property
     def username(self):
@@ -36,9 +35,9 @@ class Admin:
     @password.setter
     def password(self, new_password):
         if not isinstance(new_password, str):
-            print("< Password must be a STRING. >")
+            print("< Invalid input. Password must be a STRING. >")
         if len(new_password) < 8:
-            print("< Password must be at least 8 characters. >")
+            print("< Invalid input. Password must be at least 8 characters. >")
         self.__password = new_password
 
     @property
@@ -55,7 +54,6 @@ class Admin:
             for i in rows:
                 self.__data_admin.append(i)
         return self.__data_admin
-        # [{'username': 'adminjane', ' password': ' 15478925'}, {'username': 'adminfah', ' password': ' 54647654'}]
 
     def is_admin(self):
         # check if username and password are correct with the data in data_admin.csv
@@ -120,7 +118,7 @@ class Admin:
                         if choice == "1":
                             new_price = input("Enter new price: ")
                             while not new_price.isdigit():
-                                print("< Price must be a number. >")
+                                print("< Invalid input. Menu price must be a NUMBER. >")
                                 new_price = input("Enter new price: ")
                             self.data_menu[i]['price'] = int(new_price)
                             print("Price has been changed successfully!")
@@ -128,8 +126,8 @@ class Admin:
                             print_current()
                         elif choice == "2":
                             new_quantity = input("Enter new quantity: ")
-                            while not new_quantity.isdigit():
-                                print("< Quantity must be a number. >")
+                            while not isinstance(new_quantity, int):
+                                print("< Invalid input. Menu quantity must be a INTEGER. >")
                                 new_quantity = input("Enter new quantity: ")
                             self.data_menu[i]['quantity'] = int(new_quantity)
                             print("Quantity has been changed successfully!")
@@ -139,7 +137,7 @@ class Admin:
                         elif choice == "3":
                             new_recommend = input("Enter new recommend (y/n): ").lower()
                             while new_recommend not in ["y", "n", "Y", "N", "No", "Yes", "no", "yes", "NO", "YES"]:
-                                print("< Please choose only Yes or No >")
+                                print("< Invalid input. Please choose only 'YES' or 'NO'. >")
                                 new_recommend = input("Enter new recommend (y/n): ").lower()
                             if new_recommend in ["y", "Y", "yes", "Yes", "YES"]:
                                 self.data_menu[i]['recommend'] = "yes"
@@ -154,7 +152,7 @@ class Admin:
                             new_status = input("Enter new status (A)vailable/(O)ut of stock: ").lower()
                             while new_status not in ["a", "o", "A", "O", "Available", "Out of stock", "available",
                                                      "out of stock", "AVAILABLE", "OUT OF STOCK"]:
-                                print("< Please choose only Available or Out of stock >")
+                                print("< Invalid input. Please choose only 'AVAILABLE' or 'OUT OF STOCK'. >")
                                 new_status = input("Enter new status (A)vailable/(O)ut of stock: ").lower()
                             if new_status in ["a", "A", "available", "Available", "AVAILABLE"]:
                                 if int(self.data_menu[i]['quantity']) == 0:

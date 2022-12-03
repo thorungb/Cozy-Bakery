@@ -15,8 +15,7 @@ class Customer:
     def __init__(self, all_menu):
         self.all_menu = all_menu
         self.__cart = []
-        with open("data_menu.json", "r") as menu_file:
-            self.data_menu = json.load(menu_file)
+        self.data_menu = MenuDB.read_menu(self)
 
     @property
     def cart(self):
@@ -24,10 +23,10 @@ class Customer:
 
     def search_menu(self, menu_name):
         if not isinstance(menu_name, str):
-            raise TypeError("Menu name must be a string")
+            print("< Invalid input. Menu name must be a STRING. >")
 
         if menu_name.lower() not in str(self.data_menu).lower():  # Check if the menu name is in the menu
-            print(f"Sorry, we don't have '{menu_name}' in our menu")  # If the menu name is not in the menu
+            print(f"< Sorry, we don't have '{menu_name}' in our menu >")  # If the menu name is not in the menu
         else:  # If the menu name is in the menu
             print("---------------------------------------------------------------------------------------")
             print("             MENU NAME               REMAINING QUANTITY      PRICE (Baht per piece)    ")
@@ -63,7 +62,7 @@ class Customer:
 
     def show_cart(self):
         if len(self.__cart) == 0:
-            print("Your cart is EMPTY now. Please add some menu to your cart.")
+            print("< Your cart is EMPTY now. Please add some menu to your cart. >")
         else:
             print("\nIn your cart:")
             print("-------------------------------------------------------------------------------")
@@ -77,9 +76,9 @@ class Customer:
 
     def add_to_cart(self, menu_name, amount):
         if not isinstance(menu_name, str):
-            raise TypeError("Menu name must be a string")
+            print("< Invalid input. Menu name must be a STRING. >")
         if not isinstance(amount, int):
-            raise TypeError("Quantity must be an integer")
+            print("< Invalid input. Menu quantity must be a INTEGER. >")
 
         if menu_name.lower() not in str(self.data_menu).lower():  # Check if the menu name is in the menu
             print(f"< Sorry, we don't have '{menu_name}' in our menu. >")
@@ -121,7 +120,7 @@ class Customer:
 
     def remove_from_cart(self, menu_name):
         if not isinstance(menu_name, str):
-            raise TypeError("Menu name must be a string")
+            print("< Invalid input. Menu name must be a STRING. >")
 
         if len(self.__cart) == 0:
             print("< Your cart is EMPTY now. Please add some menu to your cart. >")
