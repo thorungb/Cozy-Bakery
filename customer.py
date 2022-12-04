@@ -122,16 +122,17 @@ class Customer:
         if not isinstance(menu_name, str):
             print("< Invalid input. Menu name must be a STRING. >")
 
-        if len(self.__cart) == 0:
+        if len(self.__cart) == 0:  # Check if the cart is empty
             print("< Your cart is EMPTY now. Please add some menu to your cart. >")
-        elif len(self.__cart) > 0:
-            for items in self.__cart:
-                if (menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()) == items[0]:
-                    self.__cart.remove(items)
-                    print(f"Removed '{menu_name}' from cart successfully!")
-                    Customer.show_cart(self)
-                else:
-                    print(f"< Sorry, we don't have '{menu_name}' in your cart. >")
+        elif len(self.__cart) > 0:  # If the cart is not empty
+            if menu_name.lower() not in str(self.__cart).lower():
+                print(f"< Sorry, you don't have '{menu_name}' in your cart. >")
+            else:  # If the menu name is in your cart
+                for items in self.__cart:
+                    if menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower() == items[0]:
+                        self.__cart.remove(items)
+                        print(f"Removed '{menu_name}' from cart successfully!\n")
+                        Customer.show_cart(self)
 
     def clear_cart(self):
         self.__cart.clear()

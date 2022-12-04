@@ -115,8 +115,8 @@ class Admin:
                     choice = input_choice()
                     while True:
                         if choice == "1":
-                            new_price = input("Enter new price: ")
-                            while not new_price.isdigit():
+                            new_price = int(input("Enter new price: "))
+                            while not isinstance(new_price, int):
                                 print("< Invalid input. Menu price must be a NUMBER. >")
                                 new_price = input("Enter new price: ")
                             self.data_menu[items]['price'] = float(new_price)
@@ -124,7 +124,7 @@ class Admin:
                             update_information()
                             print_current()
                         elif choice == "2":
-                            new_quantity = input("Enter new quantity: ")
+                            new_quantity = int(input("Enter new quantity: "))
                             while not isinstance(new_quantity, int):
                                 print("< Invalid input. Menu quantity must be a INTEGER. >")
                                 new_quantity = input("Enter new quantity: ")
