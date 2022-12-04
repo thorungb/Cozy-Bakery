@@ -15,8 +15,8 @@ for i in menu.read_menu():
 
 class Bakery:
     def __init__(self):
-        self.admin_choice = None
-        self.customer_choice = None
+        self.admin_choice = None  # is the number choice that the admin choose
+        self.customer_choice = None  # is the number choice that the customer choose
         self.data_menu = MenuDB.read_menu(self)
 
     def admin_action(self, admin):
