@@ -28,6 +28,8 @@ There are 3 Python modules are also used in this program.
 * ```csv``` : which is used for data admin and data sales summary.
 * ```datetime``` : which is used for data sales summary to record the time.
 
+Using Python version 3.10.8
+
 ## 🍰 Program design
 Here is UML class diagram of the program.
 
@@ -41,3 +43,22 @@ Here is UML class diagram of the program.
 * ```Bakery``` : this class includes all the previous classes. It is used for running the program, inputting and printing out to the user.
 
 ## 🍰 Code structure
+This program consists of 5 python files, 2 csv files and 1 json file.
+
+**Python Files**
+* **_menuDB.py_** which contains the ```MenuDB``` class
+* **_menu.py_** which contains the ```Menu``` class
+* **_admin.py_** which contains the ```Admin``` class
+* **_customer.py_** which contains the ```Customer``` class
+* **_bakery.py_** which contains the ```Bakery``` class
+
+**CSV Files**
+* **_data_admin.csv_** which contains all the admins' usernames and passwords
+* **_data_sales_summary.csv_** which contains the details of product sales
+
+**JSON Files**
+* **data_menu.json** which contains all the menu names and their details.
+
+
+
+### Thanks for your attention
