@@ -181,7 +181,7 @@ class Customer:
                 json.dump(self.data_menu, menu_file, indent=4)
             self.__cart.clear()
 
-    def update_sales_summary(self, pay_method):
+    def update_sales_summary(self, pay_method):  # update to the data_sales_sumary.csv
         with open("data_sales_summary.csv", "a", newline="") as sales_file:
             sales_writer = csv.writer(sales_file)
             for items in self.__cart:
