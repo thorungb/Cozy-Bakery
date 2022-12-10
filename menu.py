@@ -35,6 +35,7 @@ class Menu:
         else:
             print("< Invalid input. Please choose only 'AVAILABLE' or 'OUT OF STOCK'. >")
 
+        # add new menu to data_menu.json
         new_data = {
             (str(new_name[0].upper()) + str(new_name[1:len(new_name) + 1]).lower()): {
                 "price": new_price,

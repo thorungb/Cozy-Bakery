@@ -22,7 +22,7 @@ class Bakery:
     def admin_action(self, admin):
         while True:
             print("\n------------------------- Welcome to Admin management system! -------------------------")
-            print("1. Check stock \n2. Update detail \n3. Add new menu \n4. Delete menu \n5. Exit")
+            print("1. Check stock \n2. Update detail \n3. Add new menu \n4. Delete menu \n5. Sales report \n6. Exit")
             try:
                 self.admin_choice = int(input("Select your choice: "))
             except ValueError:
@@ -41,10 +41,12 @@ class Bakery:
                     print("You are deleting a menu...")
                     menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
                     Menu.delete_menu(self, menu_name)
-                elif self.admin_choice == 5:  # if the admin choose to exit
+                elif self.admin_choice == 5:  # if the admin choose to see the sales report
+                    admin.sales_report()
+                elif self.admin_choice == 6:  # if the admin choose to exit
                     print("\n> Thank you for using the system, Have a nice day! (◕‿◕✿) <")
                     return self.admin_choice
-                elif self.admin_choice not in [1, 2, 3, 4, 5]:
+                elif self.admin_choice not in [1, 2, 3, 4, 5, 6]:
                     print("< Please enter a number from 1 to 5 >")
 
     def customer_action(self, customer):
@@ -81,10 +83,11 @@ class Bakery:
                         customer.add_to_cart(menu_name, amount)
                     elif choice == 2:  # if the customer wants to remove from cart
                         menu_name = input("Enter the full name of the menu correctly (e.g. Almond croissant): ")
-                        customer.remove_from_cart(menu_name)
+                        amount = int(input("How much do you want to remove?: "))
+                        customer.remove_from_cart(menu_name, amount)
                     elif choice == 3:  # if the customer wants to clear the cart
                         customer.clear_cart()
-                        print("Your cart is now empty.")
+                        print("Your cart is cleared successfully!\n")
                     elif choice == 4:  # if the customer wants to view the cart
                         customer.show_cart()
                 elif self.customer_choice == 4:  # if the customer wants to pay the bill
@@ -109,7 +112,7 @@ class Bakery:
                         break
                     else:
                         print("< Invalid username or password >")
-                if self.admin_choice == 5:
+                if self.admin_choice == 6:
                     break
                 else:
                     print("< You have entered the wrong username or password 3 times. Please try again later >")

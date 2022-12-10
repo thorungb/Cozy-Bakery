@@ -69,7 +69,8 @@ class Admin:
         print("-------------------------------------------------------------------------------------------------------")
         self.all_menu.sort(key=lambda x: x.name)  # sort the menu by name
         for items in self.all_menu:
-            print(f" {items.name:^33} {items.quantity:^14} {items.price:^16.2f} {items.recommend:^16} {items.status:^20}")
+            print(
+                f" {items.name:^33} {items.quantity:^14} {items.price:^16.2f} {items.recommend:^16} {items.status:^20}")
         print("-------------------------------------------------------------------------------------------------------")
         print("-------------------------------------------------------------------------------------------------------")
 
@@ -88,8 +89,8 @@ class Admin:
 
         def input_choice():
             print("\n>> What do you want to change in this menu?")
-            choice = input("1. Price\n2. Quantity\n3. Recommend\n4. Status\n5. Quit\nPlease select choice: ")
-            return choice
+            select_choice = input("1. Price\n2. Quantity\n3. Recommend\n4. Status\n5. Quit\nPlease select choice: ")
+            return select_choice
 
         def print_current():
             print(f"\nCURRENT information of '{menu_name}':")
@@ -172,3 +173,28 @@ class Admin:
                         else:
                             print("< Invalid input, please try again. >")
                         choice = input_choice()
+
+    def sales_report(self):  # Show the sales report
+        with open("data_sales_summary.csv", "r") as sales_file:
+            sales_data = csv.DictReader(sales_file)
+            sales_list = list(sales_data)
+            if len(sales_list) == 0:
+                print("< No sales report yet. >")
+            else:
+                print("\nThis is the SALES REPORT")
+                print(
+                    "----------------------------------------------------------------------------------------------------------------")
+                # there are 5 columns in the file: datetime, menu name, quantity, total price, payment method
+                print(
+                    "       DATE/TIME              MENU NAME              QUANTITY       TOTAL PRICE (Baht)       PAYMENT METHOD     ")
+                print(
+                    "----------------------------------------------------------------------------------------------------------------")
+                for items in range(len(sales_list)):
+                    # print(items)
+                    print(f"{sales_list[items]['datetime']:^22} {sales_list[items]['menu_name']:^24} "
+                          f"{sales_list[items]['quantity']:^19} {float(sales_list[items]['total_price']):^17.2f} "
+                          f"{sales_list[items]['payment']:^28}")
+                print(
+                    "----------------------------------------------------------------------------------------------------------------")
+                print(
+                    "----------------------------------------------------------------------------------------------------------------")

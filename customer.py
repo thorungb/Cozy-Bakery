@@ -1,4 +1,7 @@
 import json
+import csv
+from datetime import datetime
+
 from menuDB import MenuDB
 
 # object of class MenuDB
@@ -118,9 +121,28 @@ class Customer:
                     json.dump(self.data_menu, menu_file, indent=4)
                     print(f"Added '{menu_name}' to cart successfully!\n")
 
-    def remove_from_cart(self, menu_name):
+    def remove_from_cart(self, menu_name, amount):
+        def update_remove():
+            with open("data_menu.json", "r") as menu_file:
+                self.data_menu = json.load(menu_file)
+                self.data_menu.update({menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower(): dict(
+                    price=self.data_menu[menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()][
+                        'price'],
+                    quantity=self.data_menu[menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()][
+                                 'quantity'] + amount,
+                    recommend=self.data_menu[menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()][
+                        'recommend'],
+                    status=self.data_menu[menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower()][
+                        'status'])
+                })
+            with open("data_menu.json", "w") as menu_file:  # Write the updated menu quantity to the file
+                json.dump(self.data_menu, menu_file, indent=4)
+                Customer.show_cart(self)
+
         if not isinstance(menu_name, str):
             print("< Invalid input. Menu name must be a STRING. >")
+        if not isinstance(amount, int):
+            print("< Invalid input. Menu quantity must be a INTEGER. >")
 
         if len(self.__cart) == 0:  # Check if the cart is empty
             print("< Your cart is EMPTY now. Please add some menu to your cart. >")
@@ -130,12 +152,41 @@ class Customer:
             else:  # If the menu name is in your cart
                 for items in self.__cart:
                     if menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower() == items[0]:
-                        self.__cart.remove(items)
-                        print(f"Removed '{menu_name}' from cart successfully!\n")
-                        Customer.show_cart(self)
+                        if amount > items[1]:
+                            print("< Invalid input. The quantity is more than the quantity in your cart. >")
+                        elif amount == items[1]:
+                            self.__cart.remove(items)
+                            print(f"Removed '{menu_name}' from cart successfully!\n")
+                            update_remove()
+                        elif amount < items[1]:
+                            self.__cart.remove(items)
+                            self.__cart.append((menu_name[0].upper() + menu_name[1:len(menu_name) + 1].lower(), items[1] - amount))
+                            print(f"Removed '{menu_name}' from cart successfully!\n")
+                            update_remove()
 
     def clear_cart(self):
-        self.__cart.clear()
+        if len(self.__cart) == 0:
+            print("< Your cart is EMPTY now. Please add some menu to your cart. >")
+        else:
+            with open("data_menu.json", "r") as menu_file:
+                self.data_menu = json.load(menu_file)
+                for items in self.__cart:
+                    self.data_menu.update({items[0]: dict(
+                        price=self.data_menu[items[0]]['price'],
+                        quantity=self.data_menu[items[0]]['quantity'] + items[1],
+                        recommend=self.data_menu[items[0]]['recommend'],
+                        status=self.data_menu[items[0]]['status'])
+                    })
+            with open("data_menu.json", "w") as menu_file:  # Write the updated menu quantity to the file
+                json.dump(self.data_menu, menu_file, indent=4)
+            self.__cart.clear()
+
+    def update_sales_summary(self, pay_method):
+        with open("data_sales_summary.csv", "a", newline="") as sales_file:
+            sales_writer = csv.writer(sales_file)
+            for items in self.__cart:
+                sales_writer.writerow([datetime.now().strftime("%d/%m/%Y %H:%M:%S"), items[0], items[1],
+                                       self.data_menu[items[0]]['price'] * items[1], pay_method])
 
     def pay_bill(self):
         if len(self.__cart) == 0:  # If the cart is empty
@@ -162,7 +213,9 @@ class Customer:
                 else:
                     print(f"\nYour change is {cash - sum([float(self.data_menu[items[0]]['price']) * items[1] for items in self.__cart]):.2f} Baht")
                     print("************************* Thank you for your payment **************************")
-                    self.clear_cart()  # Clear the cart after paying the bill
+                    self.update_sales_summary(pay_method)
+                    self.__cart.clear()  # Clear the cart after paying the bill
             elif pay_method == "credit":  # If the payment method is credit
                 print("************************* Thank you for your payment **************************")
-                self.clear_cart()  # Clear the cart after paying the bill
+                self.update_sales_summary(pay_method)
+                self.__cart.clear()  # Clear the cart after paying the bill
