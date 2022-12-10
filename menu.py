@@ -4,7 +4,7 @@ from menuDB import MenuDB
 
 class Menu:
     def __init__(self):
-        self.data_menu = MenuDB.read_menu(self)
+        self.data_menu = MenuDB.read_menu(self)  # is a dictionary from the class MenuDB
 
     def add_new_menu(self):
         new_name = input("Please enter new menu name: ")
