@@ -56,7 +56,7 @@ This program consists of 5 python files, 2 csv files and 1 json file.
 * **_data_admin.csv_** which contains all the admins' usernames and passwords
 * **_data_sales_summary.csv_** which contains the details of product sales
 
-**JSON Files**
+**JSON File**
 * **data_menu.json** which contains all the menu names and their details.
 
 
