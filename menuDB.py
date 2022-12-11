@@ -8,7 +8,6 @@ class MenuDB:
         self.__quantity = None
         self.__recommend = None
         self.__status = None
-        # Available: today's menu
         # Out of stock: menu that is not available today or the quantity is 0
         # if the quantity = 0, the status will be changed to "out of stock"
         self.data_menu = None

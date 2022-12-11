@@ -17,7 +17,7 @@ class Bakery:
     def __init__(self):
         self.admin_choice = None  # is the number choice that the admin choose
         self.customer_choice = None  # is the number choice that the customer choose
-        self.data_menu = MenuDB.read_menu(self)
+        self.data_menu = MenuDB.read_menu(self)  # is a dictionary from the class MenuDB
 
     def admin_action(self, admin):
         while True:
