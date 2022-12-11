@@ -13,13 +13,13 @@ You will become an admin when your username and password match the information c
 
 ### 🥨 Customer Part
 **If you are Customer, You can**
-* **_Search menu_** : for searching menus from keywords
-* **_See all menu_** : for showing all menus in this bakery to customer
-* **_See the menu recommend_** : for showing only the recommended menu to customer
-* **_See your cart_** : for showing the menu and quantity that is added to the cart
-* **_Add menu to your cart_** : for adding the menu into the cart as a cart’s list
-* **_Remove menu from your cart_** : for removing the menu from the cart
-* **_Clear your cart_** : for clearing all items from the cart
+* **_Search menu_** : for searching menus from keywords.
+* **_See all menu_** : for showing all menus in this bakery to customer.
+* **_See the menu recommend_** : for showing only the recommended menu to customer.
+* **_See your cart_** : for showing the menu and quantity that is added to the cart.
+* **_Add menu to your cart_** : for adding the menu into the cart as a cart’s list.
+* **_Remove menu from your cart_** : for removing the menu from the cart.
+* **_Clear your cart_** : for clearing all items from the cart.
 * **_Pay the bill_** : for showing the customer a bill and letting the customer choose a payment method.
 
 ## 🍰 Required libraries and tools
@@ -38,7 +38,7 @@ Here is UML class diagram of the program.
 **There are 5 classes in this project.**
 * ```MenuDB``` : this class is used to read a json file and initialize the details of each menu which consist of name, price, quantity, recommend, and status.
 * ```Menu``` : this class is for adding a new menu or deleting an existing one.
-* ```Admin``` : this class is for the admin and admin can access and change the details of the menu, and can see the sales report
+* ```Admin``` : this class is for the admin and admin can access and change the details of the menu, and can see the sales report.
 * ```Customer``` : this class is for customers and customer can choose to see all the products in the bakery, including the ability to buy or cancel the order.
 * ```Bakery``` : this class includes all the previous classes. It is used for running the program, inputting and printing out to the user.
 
@@ -46,15 +46,15 @@ Here is UML class diagram of the program.
 This program consists of 5 python files, 2 csv files and 1 json file.
 
 **Python Files**
-* **_menuDB.py_** which contains the ```MenuDB``` class
-* **_menu.py_** which contains the ```Menu``` class
-* **_admin.py_** which contains the ```Admin``` class
-* **_customer.py_** which contains the ```Customer``` class
-* **_bakery.py_** which contains the ```Bakery``` class
+* **_menuDB.py_** which contains the ```MenuDB``` class.
+* **_menu.py_** which contains the ```Menu``` class.
+* **_admin.py_** which contains the ```Admin``` class.
+* **_customer.py_** which contains the ```Customer``` class.
+* **_bakery.py_** which contains the ```Bakery``` class.
 
 **CSV Files**
-* **_data_admin.csv_** which contains all the admins' usernames and passwords
-* **_data_sales_summary.csv_** which contains the details of product sales
+* **_data_admin.csv_** which contains all the admins' usernames and passwords.
+* **_data_sales_summary.csv_** which contains the details of product sales.
 
 **JSON File**
 * **data_menu.json** which contains all the menu names and their details.
